@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div>
+  <div class="col-3">
+    <h3> Prestamo</h3>
+</div>
+</div>
+{% if ejemplares %}
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Ejemplar</th>
+        <th scope="col">Fecha de devolución</th>
+        <th scope="col">Fecha de préstamo</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for prestamo in ejemplares %}
+      <tr class="table-info">
+        <td>{{ prestamo.id}}</td>
+        <td>{{ prestamo.usuario}}</td>
+        <td>{{ prestamo.ejemplar}}</td>
+        <td>{{ prestamo.fecha_dev}}</td>
+        <td>{{ prestamo.fecha_pres}}</td>
+        <td> 
+            <a href="{% url 'ejemplares:prestamoEliminar' prestamo.id %}" class="btn btn-primary">eliminar</a>    
+            <a href="{% url 'ejemplares:prestamoEdit' prestamo.id %}" class="btn btn-primary">editar</a>    
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+
+<h1>No hay registros</h1>
+
+{% endif %}
+<div>
+  <div class="col-3">
+      <a href="{% url 'ejemplares:prestamoCreate' %}" class="btn btn-primary"> Adicionar</a>
+  </div>
+</div>
+
+{% endblock %}

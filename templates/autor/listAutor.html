@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div>
+  <div class="col-3">
+    <h5> Autores</h5>
+</div>
+</div>
+{% if libros %}
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for autor in libros %}
+      <tr class="table-info">
+        <td>{{ autor.id}}</td>
+        <td>{{ autor.nombres}}</td>
+        <td> 
+            <a href="{% url 'libros:autorEliminar' autor.id %}" class="btn btn-primary">eliminar</a>    
+            <a href="{% url 'libros:autorEdit' autor.id %}" class="btn btn-primary">editar</a>    
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+
+<h1>No hay registros</h1>
+
+{% endif %}
+<div>
+  <div class="col-3">
+      <a href="{% url 'libros:autorCreate' %}" class="btn btn-primary"> Adicionar</a>
+  </div>
+</div>
+
+{% endblock %}

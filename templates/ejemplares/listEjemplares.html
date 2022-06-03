@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div>
+  <div class="col-3">
+    <h3> Ejemplares</h3>
+</div>
+</div>
+{% if ejemplares %}
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Libro</th>
+        <th scope="col">Localización</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for ejemplar in ejemplares %}
+      <tr class="table-info">
+        <td>{{ ejemplar.id}}</td>
+        <td>{{ ejemplar.libro}}</td>
+        <td>{{ ejemplar.localización}}</td>
+        <td> 
+            <a href="{% url 'ejemplares:ejemplaresEliminar' ejemplar.id %}" class="btn btn-primary">eliminar</a>    
+            <a href="{% url 'ejemplares:ejemplaresEdit' ejemplar.id %}" class="btn btn-primary">editar</a>    
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+
+<h1>No hay registros</h1>
+
+{% endif %}
+<div>
+  <div class="col-3">
+      <a href="{% url 'ejemplares:ejemplaresCreate' %}" class="btn btn-primary"> Adicionar</a>
+  </div>
+</div>
+
+{% endblock %}
